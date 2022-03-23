@@ -28,10 +28,14 @@ import com.edevaldojr.cursomc.repositories.PedidoRepository;
 import com.edevaldojr.cursomc.repositories.ProdutoRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class DBService {
+
+        @Autowired
+        private BCryptPasswordEncoder pe;
 
         @Autowired
         private CategoriaRepository categoriaRepository;
@@ -117,7 +121,7 @@ public class DBService {
                 cidadeRepository.saveAll(Arrays.asList(c1, c2, c3));
 
                 Cliente cli1 = new Cliente(null, "Maria Silva", "ed.tadsifpr@gmail.com", "36678912377",
-                                TipoCliente.PESSOAFISICA);
+                                TipoCliente.PESSOAFISICA, pe.encode("123"));
 
                 cli1.getTelefones().addAll(Arrays.asList("36678912377", "93838393"));
 
