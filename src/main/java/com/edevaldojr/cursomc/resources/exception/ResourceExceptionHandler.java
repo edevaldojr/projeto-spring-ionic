@@ -2,6 +2,7 @@ package com.edevaldojr.cursomc.resources.exception;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.edevaldojr.cursomc.services.exceptions.AuthorizationException;
 import com.edevaldojr.cursomc.services.exceptions.DataIntegrityException;
 import com.edevaldojr.cursomc.services.exceptions.ObjectNotFoundException;
 
@@ -43,6 +44,14 @@ public class ResourceExceptionHandler {
         }
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err);
+    }
+
+    @ExceptionHandler(AuthorizationException.class)
+    public ResponseEntity<StandardError> authorization(AuthorizationException e, HttpServletRequest request) {
+
+        StandardError err = new StandardError(HttpStatus.FORBIDDEN.value(), e.getMessage(), System.currentTimeMillis());
+
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(err);
     }
 
 }
