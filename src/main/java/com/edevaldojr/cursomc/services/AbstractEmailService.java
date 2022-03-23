@@ -2,6 +2,7 @@ package com.edevaldojr.cursomc.services;
 
 import java.util.Date;
 
+import javax.annotation.ManagedBean;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
